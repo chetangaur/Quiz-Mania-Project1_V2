@@ -63,3 +63,8 @@ def logout_check(request):
     else:
         return HttpResponseRedirect(reverse('logged_out'))
         
+def stats(request):
+    if not request.user.is_authenticated:  # to check if session for user has been terminated successfully
+        return HttpResponseRedirect(reverse('login_page'))
+    else:
+        return render(request,"stats.html")
