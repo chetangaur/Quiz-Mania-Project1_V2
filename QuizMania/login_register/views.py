@@ -27,8 +27,8 @@ def register(request):
         # adding the user details inside the database(default user database is being used)
         user = User.objects.create_user(username=email,first_name=firstname,email=email,password=password)
         user.save()
-        data = Data(Name=firstname,Email=email,Password=password)
-        data.save()
+        #data = Data(Name=firstname,Email=email,Password=password)
+        #data.save()
         # need to add a middle page or something which shows that Registration is Successful
 
         return render(request,"index.html") # after registration,send the user back to login page
