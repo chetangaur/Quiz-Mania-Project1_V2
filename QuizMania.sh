@@ -1,6 +1,6 @@
 #!/bin/bash
 sudo apt-get update
-sudo apt-get install python3-pip python-dev nginx git libmysqlclient-dev mysql-server -y
+sudo apt-get install python3-pip python-dev nginx  libmysqlclient-dev mysql-server -y
 sudo apt-get update
 sudo systemctl start mysql
 sudo systemctl enable mysql
@@ -13,7 +13,7 @@ git clone https://github.com/piyushagarwal08/Quiz-Mania-Project1_V2.git
 cd Quiz-Mania-Project1_V2/QuizMania
 virtualenv venv
 source venv/bin/activate
-pip install django bycrypt django-extensions gunicorn
+pip install django bcrypt django-extensions gunicorn
 python3 manage.py collectstatic
 
 sudo cat <<EOF >> /etc/systemd/system/gunicorn.service
