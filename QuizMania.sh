@@ -9,7 +9,9 @@ echo "django Pass: "
 read DJANGO_SUPERUSER_PASSWORD
 echo "django Email: "
 read DJANGO_SUPERUSER_EMAIL
-
+export DJANGO_SUPERUSER_USERNAME=$DJANGO_SUPERUSER_USERNAME
+export DJANGO_SUPERUSER_PASSWORD=$DJANGO_SUPERUSER_PASSWORD
+export DJANGO_SUPERUSER_EMAIL=$DJANGO_SUPERUSER_EMAIL
 
 sudo apt-get update
 sudo apt-get install python3-pip python-dev nginx  libmysqlclient-dev mysql-server -y
