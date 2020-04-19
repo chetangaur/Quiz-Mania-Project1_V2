@@ -19,7 +19,7 @@ cd Quiz-Mania-Project1_V2/QuizMania
 virtualenv venv
 source venv/bin/activate
 pip install django bcrypt django-extensions gunicorn mysqlclient
-python3 manage.py collectstatic
+echo "yes" | python3 manage.py collectstatic
 
 sudo cat <<EOF >> /etc/systemd/system/gunicorn.service
 [Unit]
