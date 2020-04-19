@@ -1,10 +1,6 @@
 #!/bin/bash
 export password='push010808'
-<<<<<<< HEAD
 export ip='13.233.107.112'
-=======
-export ip='35.154.190.187'
->>>>>>> 7c1017794becc22dc91a65b5ea6e179e16631da5
 
 
 
