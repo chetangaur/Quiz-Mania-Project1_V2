@@ -1,7 +1,14 @@
 #!/bin/bash
-export password='push010808'
-export ip='13.233.107.112'
-
+echo "enter password: "
+read password
+echo "ip"
+read ip
+echo "django Username: "
+read DJANGO_SUPERUSER_USERNAME
+echo "django Pass: "
+read DJANGO_SUPERUSER_PASSWORD
+echo "django Email: "
+read DJANGO_SUPERUSER_EMAIL
 
 
 sudo apt-get update
@@ -23,7 +30,7 @@ echo "yes" | python3 manage.py collectstatic
 
 cd
 
-sudo cat <<EOF >> gunicorn.service
+sudo cat << EOF >> gunicorn.service
 [Unit]
 Description=gunicorn daemon
 After=network.target
@@ -54,8 +61,18 @@ server {
   }
 }
 EOF
+
 sudo mv QuizMania /etc/nginx/sites-available/QuizMania
-sudo ln -s /etc/nginx/sites-available/Quiz-Mania-Project1_V2/QuizMania /etc/nginx/sites-enabled
+sudo ln -s /etc/nginx/sites-available/QuizMania /etc/nginx/sites-enabled/
 sudo nginx -t
 sudo rm /etc/nginx/sites-enabled/default
+sudo service nginx restart
+
+cd 
+
+cd Quiz-Mania-Project1_V2/QuizMania
+python manage.py migrate
+python manage.py createsuperuser --noinput
+sudo systemctl daemon-reload
+sudo systemctl restart gunicorn
 sudo service nginx restart
