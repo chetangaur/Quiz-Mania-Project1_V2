@@ -4,15 +4,18 @@ sudo apt-get install python3-pip python-dev nginx git libmysqlclient-dev mysql-s
 sudo apt-get update
 sudo systemctl start mysql
 sudo systemctl enable mysql
+
+echo "CREATE DATABASE mydatabase" | sudo mysql
+echo "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '$password';" | sudo mysql
+
 sudo pip3 install virtualenv
 git clone https://github.com/piyushagarwal08/Quiz-Mania-Project1_V2.git
 cd Quiz-Mania-Project1_V2/QuizMania
 virtualenv venv
 source venv/bin/activate
 pip install django bycrypt django-extensions gunicorn
-
-
 python3 manage.py collectstatic
+
 sudo cat <<EOF >> /etc/systemd/system/gunicorn.service
 [Unit]
 Description=gunicorn daemon
@@ -44,8 +47,7 @@ server {
   }
 }
 EOF
-
-sudo ln -s /etc/nginx/sites-available/QuizMania /etc/nginx/sites-enabled
+sudo ln -s /etc/nginx/sites-available/Quiz-Mania-Project1_V2/QuizMania /etc/nginx/sites-enabled
 sudo nginx -t
 sudo rm /etc/nginx/sites-enabled/default
 sudo service nginx restart
