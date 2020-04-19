@@ -9,7 +9,7 @@ git clone https://github.com/piyushagarwal08/Quiz-Mania-Project1_V2.git
 cd Quiz-Mania-Project1_V2/QuizMania
 virtualenv venv
 source venv/bin/activate
-pip install django bycrypt django-extensions gunicorn
+pip install django bcrypt django-extensions gunicorn
 
 
 python3 manage.py collectstatic
