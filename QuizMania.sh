@@ -1,4 +1,9 @@
 #!/bin/bash
+export password='push010808'
+export ip='52.66.198.94'
+
+
+
 sudo apt-get update
 sudo apt-get install python3-pip python-dev nginx  libmysqlclient-dev mysql-server -y
 sudo apt-get update
@@ -13,7 +18,7 @@ git clone https://github.com/piyushagarwal08/Quiz-Mania-Project1_V2.git
 cd Quiz-Mania-Project1_V2/QuizMania
 virtualenv venv
 source venv/bin/activate
-pip install django bcrypt django-extensions gunicorn
+pip install django bcrypt django-extensions gunicorn mysqlclient
 python3 manage.py collectstatic
 
 sudo cat <<EOF >> /etc/systemd/system/gunicorn.service
