@@ -1,6 +1,6 @@
 #!/bin/bash
 export password='push010808'
-export ip='52.66.198.94'
+export ip='13.233.107.112'
 
 
 
@@ -21,7 +21,9 @@ source venv/bin/activate
 pip install django bcrypt django-extensions gunicorn mysqlclient
 echo "yes" | python3 manage.py collectstatic
 
-sudo cat <<EOF >> /etc/systemd/system/gunicorn.service
+cd
+
+sudo cat <<EOF >> gunicorn.service
 [Unit]
 Description=gunicorn daemon
 After=network.target
@@ -33,12 +35,12 @@ ExecStart=/home/ubuntu/Quiz-Mania-Project1_V2/QuizMania/venv/bin/gunicorn --work
 [Install]
 WantedBy=multi-user.target
 EOF
-
+sudo mv gunicorn.service /etc/systemd/system/gunicorn.service
 sudo systemctl daemon-reload
 sudo systemctl start gunicorn
 sudo systemctl enable gunicorn
 
-sudo cat <<EOF >> /etc/nginx/sites-available/QuizMania
+sudo cat <<EOF >> QuizMania
 server {
   listen 80;
   server_name $ip;
@@ -52,6 +54,7 @@ server {
   }
 }
 EOF
+sudo mv QuizMania /etc/nginx/sites-available/QuizMania
 sudo ln -s /etc/nginx/sites-available/Quiz-Mania-Project1_V2/QuizMania /etc/nginx/sites-enabled
 sudo nginx -t
 sudo rm /etc/nginx/sites-enabled/default
